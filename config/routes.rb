@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   root to: 'users#index'
 
   resources :users, only: [:index, :show]
+  resources :contacts
 
   devise_for :users, path: 'member'
   devise_scope :user do
