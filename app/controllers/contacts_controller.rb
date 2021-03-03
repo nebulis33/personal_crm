@@ -14,7 +14,7 @@ class ContactsController < ApplicationController
         if @contact.save
             redirect_to contacts_url
         else
-            flash[:errors] = @contacts.errors.full_messages
+            flash[:error] = @contact.errors.full_messages
             render :new
         end
     end
@@ -30,6 +30,6 @@ class ContactsController < ApplicationController
     private
 
         def contact_params
-            params.require(:contact).permit(:user_id, :first_name, :last_name, :nickname, :email, :phon_number, :address, :birthday)
+            params.require(:contact).permit(:user_id, :first_name, :last_name, :nickname, :email, :phone_number, :address, :birthday)
         end
 end

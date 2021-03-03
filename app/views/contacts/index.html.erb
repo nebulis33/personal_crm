@@ -1,3 +1,7 @@
+<br>
+<br>
+<h1>Contacts</h1>
 <% @contacts.each do |contact| %>
-    <%= contact.first_name %>
+    <%= contact.first_name %> <%= contact.birthday if contact.birthday %>
+    <br>
 <% end %>
