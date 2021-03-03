@@ -1,0 +1,9 @@
+<h1>New Event</h1>
+
+<%= simple_form_for @event do |f| %>
+    <%= f.input :contact_id %>
+    <%= f.input :interaction_type %>
+    <%= f.input :description %>
+    <%= f.input :date, as: :date, html5: true, start_year: Date.today.year - 1, end_year: Date.today.year, order: [:month, :day, :year] %>
+    <%= f.button :submit %>
+<% end %>
