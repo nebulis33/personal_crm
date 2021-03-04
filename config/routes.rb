@@ -2,8 +2,9 @@ Rails.application.routes.draw do
   root to: 'users#index'
 
   resources :users, only: [:index, :show]
-  resources :contacts
-  resources :recent_events
+  resources :contacts do
+    resources :recent_events
+  end
 
   devise_for :users, path: 'member'
   devise_scope :user do

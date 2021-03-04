@@ -1,6 +1,6 @@
 class RecentEventsController < ApplicationController
     def index
-        
+        @events = Contact.find(params[:contact_id]).recent_events.all
     end
 
     def new
@@ -8,18 +8,19 @@ class RecentEventsController < ApplicationController
     end
 
     def create
-        @event = RecentEvent.new(event_params)
+        @contact = Contact.find(params[:contact_id])
+        @event = Contact.find(params[:contact_id]).recent_events.new(event_params)
         if @event.save
-            redirect_to contacts_url
+            redirect_to contact_recent_events_url(@contact)
         else
             flash[:error] = @event.errors.full_messages
-            render :new
+            redirect_back(fallback_location: @contact)
         end
     end
 
     private
 
         def event_params
-            params.require(:recent_event).permit(:interaction_type, :description, :date, :contact_id)
+            params.require(:recent_events).permit(:interaction_type, :description, :date)
         end
 end
