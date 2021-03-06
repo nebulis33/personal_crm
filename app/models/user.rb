@@ -8,5 +8,5 @@ class User < ApplicationRecord
   validates :email, uniqueness: true
 
   has_many :contacts
-  has_many :recent_events, through: :contacts
+  has_many :recent_events
 end
