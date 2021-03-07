@@ -7,7 +7,6 @@ class User < ApplicationRecord
   validates :first_name, :last_name, :email, presence: true
   validates :email, uniqueness: true
 
-  has_many :contacts
-  has_many :recent_events
-  has_many :upcoming_events
+  has_many :contacts, dependent: :destroy
+  has_many :events, dependent: :destroy
 end

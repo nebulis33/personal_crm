@@ -1,6 +1,6 @@
 require "test_helper"
 
-class RecentEventsControllerTest < ActionDispatch::IntegrationTest
+class EventTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

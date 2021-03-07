@@ -1,7 +1,7 @@
 <h1>New Event</h1>
 
-<%= form_with model: @contact, :url => contact_recent_events_path, :method => :post do |f| %>
-    <%= f.fields_for :recent_events do |r| %>
+<%= form_with model: @contact, :url => contact_events_path, :method => :post do |f| %>
+    <%= f.fields_for :events do |r| %>
         <%= r.label :interaction_type %>
         <%= r.text_field :interaction_type %>
 
@@ -9,7 +9,7 @@
         <%= r.text_field :description %>
 
         <%= r.label :date %>
-        <%= r.text_field :date %>
+        <%= r.date_field :date %>
 
         <%= r.submit :create %>
     <% end %>

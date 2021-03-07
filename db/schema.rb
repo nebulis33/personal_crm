@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_07_001208) do
+ActiveRecord::Schema.define(version: 2021_03_07_194908) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,27 +29,16 @@ ActiveRecord::Schema.define(version: 2021_03_07_001208) do
     t.index ["user_id"], name: "index_contacts_on_user_id"
   end
 
-  create_table "recent_events", force: :cascade do |t|
+  create_table "events", force: :cascade do |t|
     t.bigint "contact_id"
     t.bigint "user_id"
     t.string "interaction_type", null: false
     t.text "description"
-    t.datetime "date"
+    t.datetime "date", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["contact_id"], name: "index_recent_events_on_contact_id"
-    t.index ["user_id"], name: "index_recent_events_on_user_id"
-  end
-
-  create_table "upcoming_events", force: :cascade do |t|
-    t.bigint "contact_id"
-    t.bigint "user_id"
-    t.text "description"
-    t.datetime "date"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["contact_id"], name: "index_upcoming_events_on_contact_id"
-    t.index ["user_id"], name: "index_upcoming_events_on_user_id"
+    t.index ["contact_id"], name: "index_events_on_contact_id"
+    t.index ["user_id"], name: "index_events_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

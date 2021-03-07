@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   resources :users, only: [:index, :show]
   resources :contacts do
-    resources :recent_events
+    resources :events
   end
 
   devise_for :users, path: 'member'
