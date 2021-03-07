@@ -10,6 +10,7 @@ class RecentEventsController < ApplicationController
     def create
         @contact = Contact.find(params[:contact_id])
         @event = Contact.find(params[:contact_id]).recent_events.new(event_params)
+        @event.user_id = current_user.id
         if @event.save
             redirect_to contact_recent_events_url(@contact)
         else

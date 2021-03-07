@@ -1,0 +1,13 @@
+SHOW PAGE FOR CONTACTS
+<br>
+[contact picture]
+<br>
+<%= @contact.full_name %>
+<br>
+--[sidebar] <%= @contact.address %> <%= @contact.email %> <%= @contact.phone_number %>
+<br>
+last activity: [] | last_contact: [] || birthday: <%= @contact.birthday.strftime("%m/%d/%y") %> | upcoming event(1): []
+<br>
+contact: [] (this will be a list of recent calls, texts, other non in person events and a button to add another)
+<br>
+activities: [] (this will be a list of recent in person activities and a button to add a new one)

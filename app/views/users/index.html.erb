@@ -1,7 +1,7 @@
 Hello <%= current_user.first_name %>
 <%= link_to 'sign out', destroy_user_session_path, method: 'delete' %>
-
+<br>
 [upcoming events go here, this will be the left half]
-
-
-[recent updates goes here, this will be the right half]
+<br>
+<%# on the right side %>
+<%= render partial: 'recent_updates', locals: {recent_events: @recent_events} %>

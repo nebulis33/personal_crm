@@ -9,4 +9,5 @@ class User < ApplicationRecord
 
   has_many :contacts
   has_many :recent_events
+  has_many :upcoming_events
 end

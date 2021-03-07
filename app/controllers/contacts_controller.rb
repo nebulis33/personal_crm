@@ -5,6 +5,10 @@ class ContactsController < ApplicationController
         @contacts = Contact.where(user_id: current_user.id)
     end
 
+    def show
+        @contact = Contact.find(params[:id])
+    end
+
     def new
         @contact = current_user.contacts.new
     end
