@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
     def index
-        @events = Contact.find(params[:contact_id]).events.all
+        @events = Contact.find(params[:contact_id]).events.order(date: :desc)
     end
 
     def new

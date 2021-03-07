@@ -1,16 +1,11 @@
 <h1>New Event</h1>
 
 <%= form_with model: @contact, :url => contact_events_path, :method => :post do |f| %>
-    <%= f.fields_for :events do |r| %>
-        <%= r.label :interaction_type %>
-        <%= r.text_field :interaction_type %>
-
-        <%= r.label :description %>
-        <%= r.text_field :description %>
-
-        <%= r.label :date %>
-        <%= r.date_field :date %>
-
-        <%= r.submit :create %>
+    <%= f.simple_fields_for :events do |r| %>
+        <%= r.input :interaction_type, as: :select, prompt: 'Select type',
+            collection: ["call", "text", "message", "videochat", "email", "mail", "solo_encounter", "group_encounter"] %>
+        <%= r.input :description, as: :text %>
+        <%= r.input :date, as: :date, html5: true %>
+        <%= r.submit 'Save Event' %>
     <% end %>
 <% end %>

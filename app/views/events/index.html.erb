@@ -1,6 +1,6 @@
 RECENT EVENTS
 <br>
 <% @events.each do |e| %>
-    <%= e.interaction_type %>
+    <%= e.interaction_type %> <%= e.date %>
     <br>
 <% end %>
