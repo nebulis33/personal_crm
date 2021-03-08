@@ -1,4 +1,6 @@
 class ContactsController < ApplicationController
+    before_action :require_ownership, except: [:index, :new, :create]
+
     def index
         @contacts = Contact.where(user_id: current_user.id)
     end
@@ -59,5 +61,13 @@ class ContactsController < ApplicationController
 
         def contact_params
             params.require(:contact).permit(:user_id, :first_name, :last_name, :nickname, :email, :phone_number, :address, :birthday)
+        end
+
+        def require_ownership
+            contact = Contact.find(params[:id])
+            unless contact.user_id == current_user.id
+                response = {error: "You don't own that contact"}
+                render json: response, status: 401
+            end
         end
 end

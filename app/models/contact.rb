@@ -1,6 +1,4 @@
 class Contact < ApplicationRecord
-    #need to validate user owns contact before going to show page!!
-    
     belongs_to :user
     has_many :events, dependent: :destroy
 
@@ -19,6 +17,7 @@ class Contact < ApplicationRecord
             .or(Event.where(contact_id: self.id, interaction_type: "group_encounter"))
             .last
     end
+
     def last_contact
         Event.where(contact_id: self.id)
             .and(Event.where.not(interaction_type: ["solo_encounter", "group_encounter"]))

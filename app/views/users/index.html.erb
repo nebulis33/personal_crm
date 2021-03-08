@@ -1,21 +1,30 @@
-Hello <%= current_user.first_name %>
-<%= link_to 'sign out', destroy_user_session_path, method: 'delete' %>
-<br>
-<%# left side %>
-Upcoming Events:
-<ul>
-    <%= render partial: 'updates', locals: {events: @upcoming_events, cancelable: true} %>
-</ul>
-<br>
-<%# on the right side %>
-Recent Events:
-<ul>
-    <%= render partial: 'updates', locals: {events: @recent_events,  cancelable: false} %>
-</ul>
-<br>
-You haven't contacted these people in over a week:
-<br>
-<% @need_to_contact.each do |c| %>
-    <%= c.first_name %>
-    <br>
-<% end %>
+<div class="block">
+    Hello <%= current_user.first_name %>!
+</div>
+
+<section class="container">
+    <div class="columns is-centered">
+        <div class="column">
+            <p>Upcoming Events:</p>
+            <ul>
+                <%= render partial: 'updates', locals: {events: @upcoming_events, cancelable: true} %>
+            </ul>
+        </div>
+        
+        <div class="column">
+            <p>Recent Events:</p>
+            <ul>
+                <%= render partial: 'updates', locals: {events: @recent_events,  cancelable: false} %>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<section class="container">
+
+    <p>You haven't contacted these people in over a week:</p>
+    <% @need_to_contact.each do |c| %>
+        <%= link_to c.first_name, contact_path(c) %>
+        <br>
+    <% end %>
+</section>

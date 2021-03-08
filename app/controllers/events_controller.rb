@@ -1,4 +1,7 @@
 class EventsController < ApplicationController
+    before_action :require_event_ownership, only: [:show, :edit, :update, :destroy]
+    before_action :require_contact_ownership, only: [:new, :create]
+
     def index
         @events = Contact.find(params[:contact_id]).events.order(date: :desc)
     end
@@ -20,7 +23,7 @@ class EventsController < ApplicationController
     end
 
     def destroy
-        @event = current_user.events.find(params[:id]) #may be able to replace this with a before action
+        @event = Event.find(params[:id])
         if @event.destroy
             flash[:success] = "Event canceled"
             redirect_to root_url
@@ -34,5 +37,21 @@ class EventsController < ApplicationController
 
         def event_params
             params.require(:events).permit(:interaction_type, :description, :date)
+        end
+
+        def require_event_ownership
+            event = Event.find(params[:id])
+            unless event.user_id == current_user.id
+                response = {error: "You don't own that event"}
+                render json: response, status: 401
+            end
+        end
+
+        def require_contact_ownership
+            contact = Contact.find(params[:contact_id])
+            unless contact.user_id == current_user.id
+                response = {error: "You don't own that contact"}
+                render json: response, status: 401
+            end
         end
 end

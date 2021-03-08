@@ -1,13 +1,13 @@
-SHOW PAGE FOR CONTACTS
-<br>
-[contact picture]
-<br>
-<%= @contact.full_name %>
-<br>
-🎂<%= @contact.birthday.strftime("%m/%d/%y") || "No birthday saved!" %>
-<br>
-<%= link_to "Edit contact", edit_contact_path(@contact) %> <%= link_to "Delete contact", contact_path(@contact), method: :delete, data: {confirm: "Are you sure?"} %>
-<aside>
+<figure class="image is-128x128">
+    <img src="https://www.tibs.org.tw/images/default.jpg" alt="contact image" class="is-rounded">
+</figure>
+<h1 class="title is-1"><%= @contact.full_name %></h1>
+<p>🎂<%= @contact.birthday.strftime("%m/%d/%y") || "No birthday saved!" %></p>
+<div class="block">
+    <%= link_to "Edit contact", edit_contact_path(@contact), class: 'button' %> 
+    <%= link_to "Delete contact", contact_path(@contact), class: 'button is-danger', method: :delete, data: {confirm: "Are you sure?"} %>
+<div>
+<aside class="block">
     <address>
         🏠<%= @contact.address || '' %>
         <br>
@@ -16,21 +16,35 @@ SHOW PAGE FOR CONTACTS
         ☎️<%= @contact.phone_number || '' %>
     </address>
 </aside>
-last in-person activity: <%= @last_activity_type %> <%= @last_activity_date %> | <%= "last contact was a #{@last_contact_type} on:" %> <%= @last_contact_date %>
-<br>
-upcoming event: 
-<% if @upcoming_event %>
-    <%= @upcoming_event.interaction_type %> on <%= @upcoming_event.date.strftime("%m/%d/%y") %>
-<% else %>
-    No upcoming events with this friend!
-<% end %>
-<br>
-<%= link_to "New event", new_contact_event_path(@contact) %>
-<br>
-past events: <br>
-<% @past_events.each do |e| %>
-    <%= e.interaction_type %>
-    <br>
-<% end %>
+
+<%= link_to "New event", new_contact_event_path(@contact), class: 'button' %>
+
+<p>
+last in-person activity: <%= @last_activity_type %> <%= @last_activity_date %> |
+ <%= "last contact was a #{@last_contact_type} on:" %> <%= @last_contact_date %>
+</p>
+
+<h3 class="title is-3">
+    Upcoming Event:
+</h3> 
+<div>
+    <% if @upcoming_event %>
+        <%= @upcoming_event.interaction_type %> on <%= @upcoming_event.date.strftime("%m/%d/%y") %>
+        <%= link_to "Cancel Event", contact_event_path(@contact, @upcoming_event), class: 'button', method: :delete, data: {confirm: "Are you sure?"} %>
+    <% else %>
+        No upcoming events with this friend!
+    <% end %>
+</div>
+
+<h3 class="title is-3">
+    Past Events:
+</h3>
+<div class="columns">
+    <div class="column is-half">
+        <% @past_events.each do |e| %>
+            <div class="box"><%= e.interaction_type %></div>
+        <% end %>
+    </div>
+</div>
 <%# will need to use react or something to make the description pop up on click/hover.
 Need to decide if there should be a way to view ALL past events %>
