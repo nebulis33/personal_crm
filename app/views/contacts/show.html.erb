@@ -4,10 +4,33 @@ SHOW PAGE FOR CONTACTS
 <br>
 <%= @contact.full_name %>
 <br>
---[sidebar] <%= @contact.address %> <%= @contact.email %> <%= @contact.phone_number %>
+🎂<%= @contact.birthday.strftime("%m/%d/%y") || "No birthday saved!" %>
 <br>
-last activity: [] | last_contact: [] || birthday: <%= @contact.birthday.strftime("%m/%d/%y") %> | upcoming event(1): []
+<%= link_to "Edit contact", edit_contact_path(@contact) %> <%= link_to "Delete contact", contact_path(@contact), method: :delete, data: {confirm: "Are you sure?"} %>
+<aside>
+    <address>
+        🏠<%= @contact.address || '' %>
+        <br>
+        📧<%= @contact.email || '' %>
+        <br>
+        ☎️<%= @contact.phone_number || '' %>
+    </address>
+</aside>
+last in-person activity: <%= @last_activity_type %> <%= @last_activity_date %> | <%= "last contact was a #{@last_contact_type} on:" %> <%= @last_contact_date %>
 <br>
-contact: [] (this will be a list of recent calls, texts, other non in person events and a button to add another)
+upcoming event: 
+<% if @upcoming_event %>
+    <%= @upcoming_event.interaction_type %> on <%= @upcoming_event.date.strftime("%m/%d/%y") %>
+<% else %>
+    No upcoming events with this friend!
+<% end %>
 <br>
-activities: [] (this will be a list of recent in person activities and a button to add a new one)
+<%= link_to "New event", new_contact_event_path(@contact) %>
+<br>
+past events: <br>
+<% @past_events.each do |e| %>
+    <%= e.interaction_type %>
+    <br>
+<% end %>
+<%# will need to use react or something to make the description pop up on click/hover.
+Need to decide if there should be a way to view ALL past events %>

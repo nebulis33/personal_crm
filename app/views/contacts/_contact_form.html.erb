@@ -1,0 +1,9 @@
+<%= simple_form_for contact do |f| %>
+    <%= f.input :first_name %>
+    <%= f.input :last_name %>
+    <%= f.input :nickname %>
+    <%= f.input :birthday, as: :date, html5: true, start_year: Date.today.year - 90, end_year: Date.today.year, order: [:month, :day, :year] %>
+    <%= f.input :address %>
+    <%= f.input :phone_number %>
+    <%= f.button :submit %>
+<% end %>

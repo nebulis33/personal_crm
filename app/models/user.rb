@@ -9,4 +9,8 @@ class User < ApplicationRecord
 
   has_many :contacts, dependent: :destroy
   has_many :events, dependent: :destroy
+
+  def need_to_contact
+    Contact.where("user_id = ? AND updated_at <= ?", self.id, 1.week.ago).limit(5)
+  end
 end

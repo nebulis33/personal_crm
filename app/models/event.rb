@@ -6,5 +6,5 @@ class Event < ApplicationRecord
     belongs_to :user
 
     scope :recent_events, -> {where('date < ?', Date.today)}
-    scope :upcoming_events, -> {where('date > ?', Date.today)}
+    scope :upcoming_events, -> {where('date >= ?', Date.today)}
 end

@@ -2,6 +2,8 @@
 <br>
 <h1>Contacts</h1>
 <% @contacts.each do |contact| %>
-    <%= contact.first_name %> <%= contact.birthday if contact.birthday %>
+    <%= link_to contact.first_name, contact_path(contact) %> 🎂<%= contact.birthday.strftime("%m/%d/%y") if contact.birthday %> <%= link_to "Delete contact", contact_path(contact), method: :delete, data: {confirm: "Are you sure?"} %>
     <br>
 <% end %>
+<br>
+<%= link_to "New contact", new_contact_path %>

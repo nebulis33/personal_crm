@@ -4,14 +4,18 @@ Hello <%= current_user.first_name %>
 <%# left side %>
 Upcoming Events:
 <ul>
-    <%= render partial: 'updates', locals: {events: @upcoming_events} %>
+    <%= render partial: 'updates', locals: {events: @upcoming_events, cancelable: true} %>
 </ul>
 <br>
 <%# on the right side %>
 Recent Events:
 <ul>
-    <%= render partial: 'updates', locals: {events: @recent_events} %>
+    <%= render partial: 'updates', locals: {events: @recent_events,  cancelable: false} %>
 </ul>
 <br>
-Alerts:
-[people you haven't talked to in a while]
+You haven't contacted these people in over a week:
+<br>
+<% @need_to_contact.each do |c| %>
+    <%= c.first_name %>
+    <br>
+<% end %>

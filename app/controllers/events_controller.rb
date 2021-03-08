@@ -19,6 +19,17 @@ class EventsController < ApplicationController
         end
     end
 
+    def destroy
+        @event = current_user.events.find(params[:id]) #may be able to replace this with a before action
+        if @event.destroy
+            flash[:success] = "Event canceled"
+            redirect_to root_url
+        else
+            flash[:error] = @event.errors.full_messages
+            redirect_to root_url
+        end
+    end
+
     private
 
         def event_params
