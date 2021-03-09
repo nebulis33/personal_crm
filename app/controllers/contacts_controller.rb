@@ -24,9 +24,10 @@ class ContactsController < ApplicationController
     def create
         @contact = current_user.contacts.new(contact_params)
         if @contact.save
+            flash[:success] = "#{@contact.first_name} was succesfully saved!"
             redirect_to contacts_url
         else
-            flash[:error] = @contact.errors.full_messages
+            flash.now[:error] = @contact.errors.full_messages
             render :new
         end
     end
@@ -41,7 +42,7 @@ class ContactsController < ApplicationController
             flash[:success] = "Contact updated!"
             redirect_to @contact
         else
-            flash[:error] = @contact.errors.full_messages
+            flash.now[:error] = @contact.errors.full_messages
             render :edit
         end
     end

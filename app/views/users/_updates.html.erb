@@ -3,6 +3,6 @@
         <%= link_to r.contact.first_name, contact_path(r.contact) %>:
         <%= r.interaction_type %> on 
         <%= r.date.strftime("%m/%d/%y") %>
-        <%= link_to "Cancel Event", contact_event_path(r.contact, r), class: 'button', method: :delete, data: {confirm: "Are you sure?"} if cancelable %>
+        <%= link_to "🗑️ Cancel Event", contact_event_path(r.contact, r), class: 'button is-small is-danger is-light', method: :delete, data: {confirm: "Are you sure?"} if cancelable %>
     </li>
 <% end %>

@@ -8,6 +8,8 @@ class EventsController < ApplicationController
 
     def new
         @event = Event.new
+        #@contact = Contact.find(params[:contact_id])
+        #need to get events to be actually nested in contacts
     end
 
     def create

@@ -1,18 +1,15 @@
-<div class="block">
-    Hello <%= current_user.first_name %>!
-</div>
+<h1 class="title is-1">Hello <%= current_user.first_name %>!</h1>
 
-<section class="container">
-    <div class="columns is-centered">
+<section class="container homepage-container">
+    <div class="columns">
         <div class="column">
-            <p>Upcoming Events:</p>
+            <h4 class="title is-4">Upcoming Events:</h4>
             <ul>
                 <%= render partial: 'updates', locals: {events: @upcoming_events, cancelable: true} %>
             </ul>
         </div>
-        
         <div class="column">
-            <p>Recent Events:</p>
+            <h4 class="title is-4">Recent Events:</h4>
             <ul>
                 <%= render partial: 'updates', locals: {events: @recent_events,  cancelable: false} %>
             </ul>
@@ -20,11 +17,20 @@
     </div>
 </section>
 
-<section class="container">
+<div class="block"></div>
 
-    <p>You haven't contacted these people in over a week:</p>
-    <% @need_to_contact.each do |c| %>
-        <%= link_to c.first_name, contact_path(c) %>
-        <br>
-    <% end %>
+<section class="container homepage-container">
+    <div class="columns">
+        <div class="column">
+            <h4 class="title is-4">You haven't contacted these people in over a week:</h4>
+            <% @need_to_contact.each do |c| %>
+                <%= link_to c.first_name, contact_path(c) %>
+                <br>
+            <% end %>
+        </div>
+
+        <div class="column">
+            <h4 class="title is-4">Upcoming Birthdays:</h4>
+        </div>
+    </div>
 </section>

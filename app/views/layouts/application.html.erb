@@ -13,10 +13,10 @@
   <body>
     <%= render 'shared/navbar' if current_user %>
     <% flash.each do |type, msg| %>
-      <div>
-        <%= msg %>
-      </div>
+      <% type = 'danger' if type == "error" %>
+      <%= render partial: 'shared/flash_messages', locals: {type: type, msg: msg } %>
     <% end %>
     <%= yield %>
   </body>
+  <%= render 'shared/footer' %>
 </html>
