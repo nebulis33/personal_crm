@@ -7,34 +7,34 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 # Create Users
-User.create(first_name: "Dave", last_name: "Smith", email: "foo@bar.baz", password: "foobar")
-User.create(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, email: Faker::Internet.email, password: "foobar")
-User.create(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, email: Faker::Internet.email, password: "foobar")
-User.create(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, email: Faker::Internet.email, password: "foobar")
+User.create(first_name: "Dave", last_name: "Smith", email: "foo@bar.baz", password: "foobar", confirmed_at: Time.now.utc)
+User.create(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, email: Faker::Internet.email, password: "foobar", confirmed_at: Time.now.utc)
+User.create(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, email: Faker::Internet.email, password: "foobar", confirmed_at: Time.now.utc)
+User.create(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, email: Faker::Internet.email, password: "foobar", confirmed_at: Time.now.utc)
 
 # Create Contacts
 Contact.create(user_id: 1, first_name: Faker::Name.first_name, last_name: Faker::Name.first_name, nickname: Faker::Name.initials, email: Faker::Internet.email,
-    phone_number: Faker::PhoneNumber.cell_phone, address: Faker::Address.full_address, birthday: Faker::Date.birthday(min_age: 18, max_age: 65), confirmed_at: Time.now.utc)
+    phone_number: Faker::PhoneNumber.cell_phone, address: Faker::Address.full_address, birthday: Faker::Date.birthday(min_age: 18, max_age: 65))
 Contact.create(user_id: 1, first_name: Faker::Name.first_name, last_name: Faker::Name.first_name, nickname: Faker::Name.initials, email: Faker::Internet.email,
-    phone_number: Faker::PhoneNumber.cell_phone, address: Faker::Address.full_address, birthday: Faker::Date.birthday(min_age: 18, max_age: 65), confirmed_at: Time.now.utc)
+    phone_number: Faker::PhoneNumber.cell_phone, address: Faker::Address.full_address, birthday: Faker::Date.birthday(min_age: 18, max_age: 65))
 Contact.create(user_id: 1, first_name: Faker::Name.first_name, last_name: Faker::Name.first_name, nickname: Faker::Name.initials, email: Faker::Internet.email,
-    phone_number: Faker::PhoneNumber.cell_phone, address: Faker::Address.full_address, birthday: Faker::Date.birthday(min_age: 18, max_age: 65), confirmed_at: Time.now.utc)
+    phone_number: Faker::PhoneNumber.cell_phone, address: Faker::Address.full_address, birthday: Faker::Date.birthday(min_age: 18, max_age: 65))
 Contact.create(user_id: 1, first_name: Faker::Name.first_name, last_name: Faker::Name.first_name, nickname: Faker::Name.initials, email: Faker::Internet.email,
-    phone_number: Faker::PhoneNumber.cell_phone, address: Faker::Address.full_address, birthday: Faker::Date.birthday(min_age: 18, max_age: 65), confirmed_at: Time.now.utc)
+    phone_number: Faker::PhoneNumber.cell_phone, address: Faker::Address.full_address, birthday: Faker::Date.birthday(min_age: 18, max_age: 65))
 Contact.create(user_id: 1, first_name: Faker::Name.first_name, last_name: Faker::Name.first_name, nickname: Faker::Name.initials, email: Faker::Internet.email,
-    phone_number: Faker::PhoneNumber.cell_phone, address: Faker::Address.full_address, birthday: Faker::Date.birthday(min_age: 18, max_age: 65), confirmed_at: Time.now.utc)
+    phone_number: Faker::PhoneNumber.cell_phone, address: Faker::Address.full_address, birthday: Faker::Date.birthday(min_age: 18, max_age: 65))
 Contact.create(user_id: 2, first_name: Faker::Name.first_name, last_name: Faker::Name.first_name, nickname: Faker::Name.initials, email: Faker::Internet.email,
-    phone_number: Faker::PhoneNumber.cell_phone, address: Faker::Address.full_address, birthday: Faker::Date.birthday(min_age: 18, max_age: 65), confirmed_at: Time.now.utc)
+    phone_number: Faker::PhoneNumber.cell_phone, address: Faker::Address.full_address, birthday: Faker::Date.birthday(min_age: 18, max_age: 65))
 Contact.create(user_id: 2, first_name: Faker::Name.first_name, last_name: Faker::Name.first_name, nickname: Faker::Name.initials, email: Faker::Internet.email,
-    phone_number: Faker::PhoneNumber.cell_phone, address: Faker::Address.full_address, birthday: Faker::Date.birthday(min_age: 18, max_age: 65), confirmed_at: Time.now.utc)
+    phone_number: Faker::PhoneNumber.cell_phone, address: Faker::Address.full_address, birthday: Faker::Date.birthday(min_age: 18, max_age: 65))
 Contact.create(user_id: 3, first_name: Faker::Name.first_name, last_name: Faker::Name.first_name, nickname: Faker::Name.initials, email: Faker::Internet.email,
-    phone_number: Faker::PhoneNumber.cell_phone, address: Faker::Address.full_address, birthday: Faker::Date.birthday(min_age: 18, max_age: 65), confirmed_at: Time.now.utc)
+    phone_number: Faker::PhoneNumber.cell_phone, address: Faker::Address.full_address, birthday: Faker::Date.birthday(min_age: 18, max_age: 65))
 Contact.create(user_id: 3, first_name: Faker::Name.first_name, last_name: Faker::Name.first_name, nickname: Faker::Name.initials, email: Faker::Internet.email,
-    phone_number: Faker::PhoneNumber.cell_phone, address: Faker::Address.full_address, birthday: Faker::Date.birthday(min_age: 18, max_age: 65), confirmed_at: Time.now.utc)
+    phone_number: Faker::PhoneNumber.cell_phone, address: Faker::Address.full_address, birthday: Faker::Date.birthday(min_age: 18, max_age: 65))
 Contact.create(user_id: 4, first_name: Faker::Name.first_name, last_name: Faker::Name.first_name, nickname: Faker::Name.initials, email: Faker::Internet.email,
-    phone_number: Faker::PhoneNumber.cell_phone, address: Faker::Address.full_address, birthday: Faker::Date.birthday(min_age: 18, max_age: 65), confirmed_at: Time.now.utc)
+    phone_number: Faker::PhoneNumber.cell_phone, address: Faker::Address.full_address, birthday: Faker::Date.birthday(min_age: 18, max_age: 65))
 Contact.create(user_id: 4, first_name: Faker::Name.first_name, last_name: Faker::Name.first_name, nickname: Faker::Name.initials, email: Faker::Internet.email,
-    phone_number: Faker::PhoneNumber.cell_phone, address: Faker::Address.full_address, birthday: Faker::Date.birthday(min_age: 18, max_age: 65), confirmed_at: Time.now.utc)
+    phone_number: Faker::PhoneNumber.cell_phone, address: Faker::Address.full_address, birthday: Faker::Date.birthday(min_age: 18, max_age: 65))
 
 # Create Events
 Event.create(contact_id: 1, user_id: 1, interaction_type: 'call', description: "made a call, talked about cats.", 
