@@ -31,11 +31,13 @@ gem 'devise', '~> 4.7', '>= 4.7.3'
 gem 'simple_form', '~> 5.1'
 gem 'bulma-rails', '~> 0.9.1'
 
+# May wanto to move to test/dev when this app is fully finished
+gem 'faker', '~> 2.16'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'better_errors', '~> 2.9', '>= 2.9.1'
-  gem 'faker', '~> 2.16'
   gem 'rspec-rails', '~> 4.1'
 end
 
