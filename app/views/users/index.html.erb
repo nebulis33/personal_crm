@@ -1,18 +1,13 @@
-<h1 class="title is-1">Hello <%= current_user.first_name %>!</h1>
-
 <section class="container homepage-container">
+    <h1 class="title is-1">Hello <%= current_user.first_name %>!</h1>
     <div class="columns">
         <div class="column">
             <h4 class="title is-4">Upcoming Events:</h4>
-            <ul>
-                <%= render partial: 'updates', locals: {events: @upcoming_events, cancelable: true} %>
-            </ul>
+            <%= render partial: 'updates', locals: {events: @upcoming_events, cancelable: true} %>
         </div>
         <div class="column">
             <h4 class="title is-4">Recent Events:</h4>
-            <ul>
-                <%= render partial: 'updates', locals: {events: @recent_events,  cancelable: false} %>
-            </ul>
+            <%= render partial: 'updates', locals: {events: @recent_events,  cancelable: false} %>
         </div>
     </div>
 </section>
@@ -23,14 +18,12 @@
     <div class="columns">
         <div class="column">
             <h4 class="title is-4">You haven't contacted these people in over a week:</h4>
-            <% @need_to_contact.each do |c| %>
-                <%= link_to c.first_name, contact_path(c) %>
-                <br>
-            <% end %>
+            <%= render partial: 'need_to_contact', locals: {people: @need_to_contact} %>
         </div>
 
         <div class="column">
             <h4 class="title is-4">Upcoming Birthdays:</h4>
+            <%= render partial: 'birthdays', locals: {birthdays: @birthdays} %>
         </div>
     </div>
 </section>

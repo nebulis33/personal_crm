@@ -1,0 +1,12 @@
+<% if !people.empty? %>
+        <ul>
+            <% people.each do |c| %>
+                <li class="box">
+                    <%= link_to c.first_name, contact_path(c) %>
+                    <%# add something about the last contact %>
+                </li>
+            <% end %>
+        </ul>
+    <% else %>
+        <p>Nothing here, keep up the good work!</p>
+<% end %>

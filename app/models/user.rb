@@ -11,6 +11,10 @@ class User < ApplicationRecord
   has_many :events, dependent: :destroy
 
   def need_to_contact
-    Contact.where("user_id = ? AND updated_at <= ?", self.id, 1.day.ago).limit(5) ##CHANGE BACK TO 1 WEEK!
+    Contact.where("user_id = ? AND updated_at <= ?", self.id, 1.week.ago).limit(5)
+  end
+
+  def birthdays
+    Contact.where("user_id = ? AND birthday <= ?", self.id, 1.week.from_now)
   end
 end

@@ -1,0 +1,11 @@
+<% if birthdays.empty? %>
+    <p>No upcoming birthdays, you can rest easy.</p>
+<% else %>
+    <ul>
+        <% @birthdays.each do |b| %>
+            <li class="box">
+                🎂 <%= link_to b.first_name, contact_path(b) %>: <%= b.birthday.strftime("%m/%d") %>
+            </li>
+        <% end %>
+    </ul>
+<% end %>

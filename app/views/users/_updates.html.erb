@@ -1,8 +1,16 @@
-<% events.each do |r| %>
-    <li class="box">
-        <%= link_to r.contact.first_name, contact_path(r.contact) %>:
-        <%= r.interaction_type %> on 
-        <%= r.date.strftime("%m/%d/%y") %>
-        <%= link_to "🗑️ Cancel Event", contact_event_path(r.contact, r), class: 'button is-small is-danger is-light', method: :delete, data: {confirm: "Are you sure?"} if cancelable %>
-    </li>
+<% if events.empty? %>
+    <p>No events :( Go talk to some friends!</p>
+<% else %>
+    <ul>
+        <% events.each do |r| %>
+            <li class="box">
+                <%= link_to r.contact.first_name, contact_path(r.contact) %>:
+                <%= r.interaction_type %> on 
+                <%= r.date.strftime("%m/%d/%y") %>
+                <%= link_to "🗑️ Cancel Event", contact_event_path(r.contact, r),
+                    class: 'button is-small is-danger is-light', 
+                    method: :delete, data: {confirm: "Are you sure?"} if cancelable %>
+            </li>
+        <% end %>
+    </ul>
 <% end %>
