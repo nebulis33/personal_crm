@@ -1,3 +1,11 @@
 // Place all the styles related to the contacts controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+.contact-index, .contact-show {
+    margin: 1.2em;
+}
+
+.contact-index-name {
+    font-size: 1.5em;
+}

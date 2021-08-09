@@ -1,18 +1,20 @@
+<div class="contact-index">
 <h1 class="title is-1">Contacts</h1>
-<div class="columns">
-    <div class="column is-one-third">
+<div class="columns is-multiline">
         <% @contacts.each do |contact| %>
+        <div class="column is-one-third">
             <div class="box">
             <article class="media">
                 <div class="media-left">
                     <figure class="image is-64x64">
-                        <img src="https://www.tibs.org.tw/images/default.jpg" alt="contact profile image" class="is-rounded">
+                        <%= cl_image_tag(contact.display_contact_image, quality: 80, gravity: 'faces', height: 80, width: 80, fetch_format: :auto, crop: 'fill', class: 'is-rounded') %>
+                        <%# Not sure if gravity counts as a transformation for the default image. If so, will need to alter function to include gravity or not %>
                     </figure>
                 </div>
                 <div class="media-content">
                     <div class="content">
                         <p>
-                            <%= link_to contact.first_name, contact_path(contact) %>
+                            <%= link_to contact.first_name, contact_path(contact), class: "contact-index-name" %>
                             <br>
                             🎂<%= contact.birthday.strftime("%m/%d/%y") if contact.birthday %>
                             <br>
@@ -22,9 +24,10 @@
                 </div>
             </article>
         </div>
+        </div>
         <% end %>
+</div>
         <br>
         <%= link_to "New contact", new_contact_path, class: "button is-primary" %>
-    </div>
-</div>
 
+</div>

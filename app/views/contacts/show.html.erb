@@ -1,19 +1,21 @@
+<div class="contact-show">
 <figure class="image is-128x128">
-    <img src="https://www.tibs.org.tw/images/default.jpg" alt="contact image" class="is-rounded">
+    <%= cl_image_tag(@contact.display_contact_image, quality: 80, gravity: 'faces', height: 150, width: 150, fetch_format: :auto, crop: 'fill', class: 'is-rounded') %>
+    <%# Not sure if gravity counts as a transformation for the default image. If so, will need to alter function to include gravity or not %>
 </figure>
 <h1 class="title is-1"><%= @contact.full_name %></h1>
-<p>🎂<%= @contact.birthday.strftime("%m/%d/%y") || "No birthday saved!" %></p>
+<p>🎂 <%= @contact.display_birthday || "No birthday saved!" %></p>
 <div class="block">
-    <%= link_to "Edit contact", edit_contact_path(@contact), class: 'button is-small is-light' %> 
+    <%= link_to "✏️ Edit contact", edit_contact_path(@contact), class: 'button is-small is-light' %> 
     <%= link_to "🗑️ Delete contact", contact_path(@contact), class: 'button is-danger is-small', method: :delete, data: {confirm: "Are you sure?"} %>
 <div>
 <aside class="block">
     <address>
-        🏠<%= @contact.address || '' %>
+        🏠 <%= @contact.address || 'No address saved!' %>
         <br>
-        📧<%= @contact.email || '' %>
+        📧 <%= @contact.email || 'No email saved!' %>
         <br>
-        ☎️<%= @contact.phone_number || '' %>
+        ☎️ <%= @contact.phone_number || 'No phone number saved!' %>
     </address>
 </aside>
 
@@ -24,17 +26,22 @@ last in-person activity: <%= @last_activity_type %> <%= @last_activity_date %> |
  <%= "last contact was a #{@last_contact_type} on:" %> <%= @last_contact_date %>
 </p>
 
-<h3 class="title is-3">
-    Upcoming Event:
-</h3> 
-<div>
-    <% if @upcoming_event %>
-        <%= @upcoming_event.interaction_type %> on <%= @upcoming_event.date.strftime("%m/%d/%y") %>
-        <%= link_to "Cancel Event", contact_event_path(@contact, @upcoming_event), class: 'button is-small is-danger is-light', method: :delete, data: {confirm: "Are you sure?"} %>
-    <% else %>
-        No upcoming events with this friend!
-    <% end %>
-</div>
+
+<article class="box is-half">
+    <h3 class="title is-3">
+        Upcoming Events:
+    </h3>
+    <div class="columns">
+        <div class="column">
+            <% if @upcoming_event %>
+                <%= @upcoming_event.interaction_type %> on <%= @upcoming_event.date.strftime("%m/%d/%y") %>
+                <%= link_to "Cancel Event", contact_event_path(@contact, @upcoming_event), class: 'button is-small is-danger is-light', method: :delete, data: {confirm: "Are you sure?"} %>
+            <% else %>
+                No upcoming events with this friend!
+            <% end %>
+        </div>
+    </div>
+</article>
 
 <h3 class="title is-3">
     Past Events:
@@ -48,3 +55,5 @@ last in-person activity: <%= @last_activity_type %> <%= @last_activity_date %> |
 </div>
 <%# will need to use react or something to make the description pop up on click/hover.
 Need to decide if there should be a way to view ALL past events %>
+
+</div>

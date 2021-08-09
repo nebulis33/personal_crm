@@ -7,7 +7,7 @@ class User < ApplicationRecord
   validates :first_name, :last_name, :email, presence: true
   validates :email, uniqueness: true
 
-  has_many :contacts, dependent: :destroy
+  has_many :contacts, -> {order 'first_name DESC'}, dependent: :destroy
   has_many :events, dependent: :destroy
 
   def need_to_contact

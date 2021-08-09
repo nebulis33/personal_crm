@@ -4,11 +4,14 @@
         <%= simple_form_for contact, defaults: {input_html: {class: "input"}} do |f| %>
             <%= f.input :first_name %>
             <%= f.input :last_name %>
+            <%= f.input :contact_image, direct_upload: true %>
             <%= f.input :nickname %>
             <%= f.input :birthday, as: :date, html5: true, start_year: Date.today.year - 90, end_year: Date.today.year, order: [:month, :day, :year] %>
             <%= f.input :address %>
+            <%= f.input :email %>
             <%= f.input :phone_number, as: :tel %>
             <%= f.button :submit %>
+            <%= link_to "Cancel", :back, class: "button is-light" %>
         <% end %>
     
     </div>

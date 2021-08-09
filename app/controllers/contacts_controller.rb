@@ -2,7 +2,7 @@ class ContactsController < ApplicationController
     before_action :require_ownership, except: [:index, :new, :create]
 
     def index
-        @contacts = Contact.where(user_id: current_user.id)
+        @contacts = Contact.where(user_id: current_user.id).order('first_name')
     end
 
     def show
@@ -61,7 +61,7 @@ class ContactsController < ApplicationController
     private
 
         def contact_params
-            params.require(:contact).permit(:user_id, :first_name, :last_name, :nickname, :email, :phone_number, :address, :birthday)
+            params.require(:contact).permit(:user_id, :first_name, :last_name, :contact_image, :nickname, :birthday, :address, :email, :phone_number)
         end
 
         def require_ownership
