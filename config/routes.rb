@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :contacts do
     resources :events
   end
+  get '/events', to: 'events#overview'
 
   devise_for :users, path: 'member'
   devise_scope :user do

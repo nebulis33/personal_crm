@@ -31,6 +31,7 @@ gem 'bootsnap', '>= 1.4.4', require: false
 gem 'devise', '~> 4.7', '>= 4.7.3'
 gem 'simple_form', '~> 5.1'
 gem 'bulma-rails', '~> 0.9.1'
+gem 'simple_calendar', '~> 2.4', '>= 2.4.3'
 
 # May wanto to move to test/dev when this app is fully finished
 gem 'faker', '~> 2.16'

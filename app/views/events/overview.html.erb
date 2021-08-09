@@ -1,12 +1,9 @@
-<h1 class="title is-1">All Events With <%= link_to @contact.first_name, contact_path(@contact) %></h1>
-<br>
-
 <%= month_calendar(attribute: :date, events: @events) do |date, events| %>
     <%= date.day %>
 
     <% events.each do |event| %>
         <div>
-            <%= event.interaction_type %>
+            <%= event.interaction_type %> with <%= link_to event.contact.first_name %>
             <%#= event.contact %>
         </div>
     <% end %>

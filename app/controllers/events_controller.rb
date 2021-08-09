@@ -3,6 +3,7 @@ class EventsController < ApplicationController
     before_action :require_contact_ownership, only: [:new, :create]
 
     def index
+        @contact = Contact.find(params[:contact_id])
         @events = Contact.find(params[:contact_id]).events.order(date: :desc)
     end
 
@@ -17,7 +18,9 @@ class EventsController < ApplicationController
         @event = Contact.find(params[:contact_id]).events.new(event_params)
         @event.user_id = current_user.id
         if @event.save
-            redirect_to contact_events_url(@contact)
+            # redirect_to contact_events_url(@contact)
+            # Redirect to here when the "all events" calendar has more functionality/js
+            redirect_to @contact
         else
             flash[:error] = @event.errors.full_messages
             redirect_back(fallback_location: @contact)
@@ -33,6 +36,10 @@ class EventsController < ApplicationController
             flash[:error] = @event.errors.full_messages
             redirect_to root_url
         end
+    end
+
+    def overview
+        @events = current_user.events
     end
 
     private
