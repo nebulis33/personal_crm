@@ -27,21 +27,24 @@ last in-person activity: <%= @last_activity_type %> <%= @last_activity_date %> |
 </p>
 
 
-<article class="box is-half">
     <h3 class="title is-3">
         Upcoming Events:
     </h3>
     <div class="columns">
-        <div class="column">
-            <% if @upcoming_event %>
-                <%= @upcoming_event.interaction_type %> on <%= @upcoming_event.date.strftime("%m/%d/%y") %>
-                <%= link_to "Cancel Event", contact_event_path(@contact, @upcoming_event), class: 'button is-small is-danger is-light', method: :delete, data: {confirm: "Are you sure?"} %>
+        <div class="column is-half">
+
+            <% if @upcoming_events %>
+                <% @upcoming_events.each do |e| %>
+                    <div class="box">
+                        <%= e.interaction_type %> on <%= e.date.strftime("%m/%d/%y") %>
+                        <%= link_to "Cancel Event", contact_event_path(@contact, e), class: 'button is-small is-danger is-light', method: :delete, data: {confirm: "Are you sure?"} %>
+                    </div>
+                <% end %>
             <% else %>
-                No upcoming events with this friend!
+                No upcoming events with this friend! Maybe you should plan one?
             <% end %>
         </div>
     </div>
-</article>
 
 <h3 class="title is-3">
     Past Events:
