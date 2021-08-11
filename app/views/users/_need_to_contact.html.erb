@@ -2,8 +2,18 @@
         <ul>
             <% people.each do |c| %>
                 <li class="box">
-                    <%= link_to c.first_name, contact_path(c) %>
-                    <%# add something about the last contact %>
+                <div class="columns">
+                    <div class="column is-narrow contact-thumb">
+                        <figure class="image is-24x24">
+                            <%= cl_image_tag(c[3] ? c[3] : "default_ilnk3n.jpg", quality: 80, gravity: 'faces', height: 35, width: 35, fetch_format: :auto, crop: 'thumb', class: 'is-rounded') %>
+                            <%# Not sure if gravity counts as a transformation for the default image. If so, will need to alter function to include gravity or not %>
+                            <%# also, this needs to be put in a model or controller %>
+                        </figure>
+                    </div>
+                    <div class="column contact-thumb">
+                        <%= link_to c[0], contact_path(c[1]) %> - last contact was: <%= c[2].strftime("%m/%d/%y") || "You haven't contacted this person yet!" %>
+                    </div>
+                </div>
                 </li>
             <% end %>
         </ul>
