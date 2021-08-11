@@ -7,6 +7,6 @@ class Event < ApplicationRecord
 
     delegate :contact_image, :first_name, :display_contact_image, to: :contact
 
-    scope :recent_events, -> {where('date < ?', Date.today)}
-    scope :upcoming_events, -> {where('date >= ?', Date.today)}
+    scope :recent_events, -> {where('date < ?', Date.today).order('date DESC')}
+    scope :upcoming_events, -> {where('date >= ?', Date.today).order(:date)}
 end

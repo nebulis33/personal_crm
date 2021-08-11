@@ -4,18 +4,16 @@ class EventsController < ApplicationController
 
     def index
         @contact = Contact.find(params[:contact_id])
-        @events = Contact.find(params[:contact_id]).events.order(date: :desc)
+        @events = @contact.events.order(date: :desc)
     end
 
     def new
-        @event = Event.new
-        #@contact = Contact.find(params[:contact_id])
-        #need to get events to be actually nested in contacts
+        @event = Contact.find(params[:contact_id]).events.new
     end
 
     def create
         @contact = Contact.find(params[:contact_id])
-        @event = Contact.find(params[:contact_id]).events.new(event_params)
+        @event = @contact.events.new(event_params)
         @event.user_id = current_user.id
         if @event.save
             # redirect_to contact_events_url(@contact)

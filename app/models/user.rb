@@ -21,7 +21,7 @@ class User < ApplicationRecord
       ON contacts.id = e.contact_id
       WHERE e.max_date <= current_date - interval '7 days'
       ORDER BY e.max_date ASC
-      LIMIT 5
+      LIMIT 6
     SQL
 
     pg_arr = ActiveRecord::Base.connection.execute(query).values

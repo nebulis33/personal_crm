@@ -13,8 +13,8 @@ class ContactsController < ApplicationController
         @last_contact_type = @contact.last_contact ? @contact.last_contact.interaction_type : 'No recent contact!'
         @last_contact_date = @contact.last_contact ? @contact.last_contact.date.strftime("%m/%d/%Y") : ''
 
-        @upcoming_events = @contact.events.upcoming_events ? @contact.events.upcoming_events.first(3) : nil
-        @past_events = @contact.events.recent_events.limit(5)
+        @upcoming_events = !@contact.events.upcoming_events.empty? ? @contact.events.upcoming_events.limit(3) : nil
+        @past_events = !@contact.events.recent_events.empty? ? @contact.events.recent_events.limit(3) : nil
     end
 
     def new

@@ -1,14 +1,17 @@
-<div class="contact-show">
+<section class="section">
 <figure class="image is-128x128">
     <%= cl_image_tag(@contact.display_contact_image, quality: 80, gravity: 'faces', height: 150, width: 150, fetch_format: :auto, crop: 'fill', class: 'is-rounded') %>
     <%# Not sure if gravity counts as a transformation for the default image. If so, will need to alter function to include gravity or not %>
 </figure>
-<h1 class="title is-1"><%= @contact.full_name %></h1>
-<p>🎂 <%= @contact.display_birthday || "No birthday saved!" %></p>
+
 <div class="block">
-    <%= link_to "✏️ Edit contact", edit_contact_path(@contact), class: 'button is-small is-light' %> 
-    <%= link_to "🗑️ Delete contact", contact_path(@contact), class: 'button is-danger is-small', method: :delete, data: {confirm: "Are you sure?"} %>
-<div>
+    <h1 class="title is-1"><%= @contact.full_name %></h1>
+    <p>🎂 <%= @contact.display_birthday || "No birthday saved!" %></p>
+    <div class="block">
+        <%= link_to "✏️ Edit contact", edit_contact_path(@contact), class: 'button is-small is-light' %> 
+        <%= link_to "🗑️ Delete contact", contact_path(@contact), class: 'button is-danger is-small', method: :delete, data: {confirm: "Are you sure?"} %>
+    <div>
+</div>
 <aside class="block">
     <address>
         🏠 <%= @contact.address || 'No address saved!' %>
@@ -19,14 +22,19 @@
     </address>
 </aside>
 
-<%= link_to "New event", new_contact_event_path(@contact), class: 'button is-primary' %>
-
-<p>
-last in-person activity: <%= @last_activity_type %> <%= @last_activity_date %> |
+<p class="block">
+last in-person activity: <%= @last_activity_type %> on <%= @last_activity_date %> |
  <%= "last contact was a #{@last_contact_type} on:" %> <%= @last_contact_date %>
 </p>
 
+<div class="block">
+    <%= link_to "New event", new_contact_event_path(@contact), class: 'button is-primary' %>
+</div>
 
+</section>
+
+
+<section class="section">
     <h3 class="title is-3">
         Upcoming Events:
     </h3>
@@ -37,7 +45,11 @@ last in-person activity: <%= @last_activity_type %> <%= @last_activity_date %> |
                 <% @upcoming_events.each do |e| %>
                     <div class="box">
                         <%= e.interaction_type %> on <%= e.date.strftime("%m/%d/%y") %>
-                        <%= link_to "Cancel Event", contact_event_path(@contact, e), class: 'button is-small is-danger is-light', method: :delete, data: {confirm: "Are you sure?"} %>
+                        <%= link_to "Cancel Event", contact_event_path(@contact, e), 
+                            class: 'button is-small is-danger is-light event-show-cancel', 
+                            method: :delete, 
+                            data: {confirm: "Are you sure?"}
+                        %>
                     </div>
                 <% end %>
             <% else %>
@@ -45,18 +57,23 @@ last in-person activity: <%= @last_activity_type %> <%= @last_activity_date %> |
             <% end %>
         </div>
     </div>
+</section>
 
-<h3 class="title is-3">
-    Past Events:
-</h3>
-<div class="columns">
-    <div class="column is-half">
-        <% @past_events.each do |e| %>
-            <div class="box"><%= e.interaction_type %></div>
-        <% end %>
+<section class="section">
+    <h3 class="title is-3">
+        Past Events:
+    </h3>
+    <div class="columns">
+        <div class="column is-half">
+            <% if @past_events %>
+                <% @past_events.each do |e| %>
+                    <div class="box"><%= e.date.strftime("%m/%d/%y")%>: <%= e.interaction_type %></div>
+                <% end %>
+            <% else %>
+                No past events with this friend. Get out there ad start making memories!
+            <% end %>
+        </div>
     </div>
-</div>
-<%# will need to use react or something to make the description pop up on click/hover.
-Need to decide if there should be a way to view ALL past events %>
-
-</div>
+    <%# will need to use react or something to make the description pop up on click/hover.
+    Need to decide if there should be a way to view ALL past events %>
+</section>

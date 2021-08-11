@@ -1,4 +1,4 @@
-<h1 class="title is-1">New Event With <%#= @contact.first_name %></h1>
+<h1 class="title is-1">New Event With <%= @event.contact.first_name %></h1>
 
 <%= form_with model: @contact, :url => contact_events_path, :method => :post do |f| %>
     <%= f.simple_fields_for :events do |r| %>
@@ -13,5 +13,6 @@
         <%= r.input :description, as: :text %>
         <%= r.input :date, as: :date, html5: true %>
         <%= r.submit 'Save Event', class: "button is-primary" %>
+        <%= link_to "Cancel", :back, class: "button is-light" %>
     <% end %>
 <% end %>

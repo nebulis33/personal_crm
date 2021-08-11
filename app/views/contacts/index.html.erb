@@ -18,7 +18,9 @@
                             <br>
                             🎂<%= contact.birthday.strftime("%m/%d/%y") if contact.birthday %>
                             <br>
-                            <%= link_to "🗑️ Delete Contact", contact_path(contact), method: :delete, data: {confirm: "Are you sure?"}, class: "button is-danger is-small is-light" %>
+                            <%= link_to "📅 New event", new_contact_event_path(contact), class: 'button is-small is-primary is-light is-outlined' %>
+                            <%#= link_to "✏️ Edit contact", edit_contact_path(contact), class: 'button is-small is-light' %>
+                            <%#= link_to "🗑️ Delete Contact", contact_path(contact), method: :delete, data: {confirm: "Are you sure?"}, class: "button is-danger is-small is-light" %>
                         </p>
                     </div>
                 </div>
