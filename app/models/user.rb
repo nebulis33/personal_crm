@@ -35,9 +35,12 @@ class User < ApplicationRecord
     return users
 
   end
-  ## consider moving to another model
+  ## consider moving need_to_contact to another model
 
   def birthdays
-    Contact.where("user_id = ? AND birthday <= ?", self.id, 1.week.from_now)
+    Contact
+      .where("user_id = :id AND extract(DOY FROM birthday) <= :next_week AND extract(DOY FROM birthday) >= :today", id: self.id, next_week: 1.week.from_now.yday, today: Time.now.yday)
+      .order(:first_name)
+      .limit(6)
   end
 end

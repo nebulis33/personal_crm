@@ -1,8 +1,8 @@
 class UsersController < ApplicationController
     before_action :require_user, only: [:show]
     def index
-       @recent_events = Event.includes(:contact).where(user_id: current_user.id).recent_events
-       @upcoming_events = Event.includes(:contact).where(user_id: current_user.id).upcoming_events
+       @recent_events = Event.includes(:contact).where(user_id: current_user.id).recent_events.order("date DESC").limit(6)
+       @upcoming_events = Event.includes(:contact).where(user_id: current_user.id).upcoming_events.order("date DESC").limit(6)
        @need_to_contact = current_user.need_to_contact
        @birthdays = current_user.birthdays
     end
