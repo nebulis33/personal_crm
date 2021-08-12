@@ -14,17 +14,25 @@ class Contact < ApplicationRecord
             "#{self.first_name || ''} #{self.last_name || ''}"
         end
     end
-
+    
     def last_activity
-        Event.where(contact_id: self.id, interaction_type: "solo_encounter")
-            .or(Event.where(contact_id: self.id, interaction_type: "group_encounter"))
-            .last
+        Event.select(:date, :interaction_type).where(contact_id: self.id)
+        .where(interaction_type: ["group_encounter", "solo_encounter"])
+        .last
+    end
+    
+    def last_contact
+        Event.select(:date, :interaction_type).where(contact_id: self.id)
+        .where.not(interaction_type: ["group_encounter", "solo_encounter"])
+        .last
+    end
+    
+    def upcoming_events
+        Event.where('contact_id = ? AND date >= ?', self.id, Date.today).order('date DESC').limit(3)
     end
 
-    def last_contact
-        Event.where(contact_id: self.id)
-            .and(Event.where.not(interaction_type: ["solo_encounter", "group_encounter"]))
-            .last
+    def recent_events
+        Event.where('contact_id = ? AND date < ?', self.id, Date.today).order('date ASC').limit(3)
     end
 
     def display_contact_image
@@ -48,4 +56,5 @@ class Contact < ApplicationRecord
         self.phone_number = nil if self.phone_number.blank?
         self.email = nil if self.email.blank?
     end
+
 end

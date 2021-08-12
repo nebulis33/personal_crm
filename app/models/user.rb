@@ -12,30 +12,25 @@ class User < ApplicationRecord
 
   def need_to_contact
     query = <<-SQL
-    SELECT first_name, contact_id, e.max_date
+    SELECT first_name, contact_id, e.max_date, asb.key
       FROM contacts
       JOIN (SELECT DISTINCT contact_id, MAX(date) AS max_date
         FROM events
         WHERE user_id = #{self.id}
         GROUP BY contact_id) e
       ON contacts.id = e.contact_id
+      LEFT JOIN active_storage_attachments asa
+      ON e.contact_id = asa.record_id
+      LEFT JOIN active_storage_blobs asb
+      ON asa.blob_id = asb.id
       WHERE e.max_date <= current_date - interval '7 days'
       ORDER BY e.max_date ASC
       LIMIT 6
     SQL
 
-    pg_arr = ActiveRecord::Base.connection.execute(query).values
-
-    users = []
-    pg_arr.each do |a|
-      u = Contact.find(a[1]).contact_image.key || false
-      users << [*a, u]
-    end
-
-    return users
-
+    ActiveRecord::Base.connection.execute(query).values
   end
-  ## consider moving need_to_contact to another model
+  ## consider moving need_to_contact to another model. Also, try to rewrite using rails vs raw sql.
 
   def birthdays
     Contact

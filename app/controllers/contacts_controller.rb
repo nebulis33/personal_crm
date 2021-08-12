@@ -2,19 +2,17 @@ class ContactsController < ApplicationController
     before_action :require_ownership, except: [:index, :new, :create]
 
     def index
-        @contacts = Contact.where(user_id: current_user.id).order('first_name')
+        @contacts = Contact.includes(contact_image_attachment: :blob).where(user_id: current_user.id).order('first_name')
     end
 
     def show
-        @contact = Contact.includes(:events).find(params[:id])
-        @last_activity_type = @contact.last_activity ? @contact.last_activity.interaction_type : 'No recent activities!'
-        @last_activity_date = @contact.last_activity ? @contact.last_activity.date.strftime("%m/%d/%y") : ''
+        @contact = Contact.find(params[:id])
 
-        @last_contact_type = @contact.last_contact ? @contact.last_contact.interaction_type : 'No recent contact!'
-        @last_contact_date = @contact.last_contact ? @contact.last_contact.date.strftime("%m/%d/%Y") : ''
+        @last_activity = @contact.last_activity
+        @last_contact = @contact.last_contact
 
-        @upcoming_events = !@contact.events.upcoming_events.empty? ? @contact.events.upcoming_events.limit(3) : nil
-        @past_events = !@contact.events.recent_events.empty? ? @contact.events.recent_events.limit(3) : nil
+        @upcoming_events = @contact.upcoming_events
+        @recent_events = @contact.recent_events
     end
 
     def new

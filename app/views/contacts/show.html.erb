@@ -23,8 +23,17 @@
 </aside>
 
 <p class="block">
-last in-person activity: <%= @last_activity_type %> on <%= @last_activity_date %> |
- <%= "last contact was a #{@last_contact_type} on:" %> <%= @last_contact_date %>
+    <% if @last_contact %>
+        <%= "last contact was a #{@last_contact.interaction_type} on #{@last_contact.date.strftime("%m/%d/%y")} " %>
+    <% else %>
+        You haven't contacted this person yet! 
+    <% end %>
+    |
+    <% if @last_activity %>
+        <%= " Last in person activity was a #{@last_activity.interaction_type} on #{@last_activity.date.strftime("%m/%d/%y")}"%>
+    <% else %>
+        You haven't done any activities with this person yet!
+    <% end %>
 </p>
 
 <div class="block">
@@ -41,7 +50,7 @@ last in-person activity: <%= @last_activity_type %> on <%= @last_activity_date %
     <div class="columns">
         <div class="column is-half">
 
-            <% if @upcoming_events %>
+            <% if !@upcoming_events.empty? %>
                 <% @upcoming_events.each do |e| %>
                     <div class="box">
                         <%= e.interaction_type %> on <%= e.date.strftime("%m/%d/%y") %>
@@ -61,16 +70,23 @@ last in-person activity: <%= @last_activity_type %> on <%= @last_activity_date %
 
 <section class="section">
     <h3 class="title is-3">
-        Past Events:
+        Recent Events:
     </h3>
     <div class="columns">
         <div class="column is-half">
-            <% if @past_events %>
-                <% @past_events.each do |e| %>
-                    <div class="box"><%= e.date.strftime("%m/%d/%y")%>: <%= e.interaction_type %></div>
+            <% if !@recent_events.empty? %>
+                <% @recent_events.each do |e| %>
+                    <div class="box">
+                        <%= e.date.strftime("%m/%d/%y")%>: <%= e.interaction_type %>
+                        <%= link_to "🗑️", contact_event_path(@contact, e), 
+                            class: 'button is-small is-danger is-light event-show-cancel', 
+                            method: :delete, 
+                            data: {confirm: "Are you sure?"}
+                        %>
+                    </div>
                 <% end %>
             <% else %>
-                No past events with this friend. Get out there ad start making memories!
+                No recent events with this friend. Get out there ad start making memories!
             <% end %>
         </div>
     </div>
