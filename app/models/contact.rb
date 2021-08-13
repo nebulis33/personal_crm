@@ -5,6 +5,8 @@ class Contact < ApplicationRecord
     validates :first_name, presence: true
     has_one_attached :contact_image
 
+    accepts_nested_attributes_for :events, allow_destroy: true
+
     before_validation :set_nils
 
     def full_name

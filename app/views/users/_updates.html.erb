@@ -15,7 +15,7 @@
                         <%= link_to r.first_name, contact_path(r.contact) %>:
                         <%= r.interaction_type %> on 
                         <%= r.date.strftime("%m/%d/%y") %>
-                        <%= link_to "🗑️ Cancel Event", contact_event_path(r.contact, r),
+                        <%= link_to "🗑️ Cancel Event", event_path(r),
                             class: 'button is-small is-danger is-light', 
                             method: :delete, data: {confirm: "Are you sure?"} if cancelable %>
                     </div>

@@ -45,9 +45,13 @@ Event.create(contact_id: 2, user_id: 1, interaction_type: 'mail', description: "
     date: Faker::Date.between(from: 4.days.ago, to: Date.today))
 Event.create(contact_id: 2, user_id: 1, interaction_type: 'solo_encounter', description: "Met up in the park and played catch.", 
     date: Faker::Date.forward(days: 12))
-Event.create(contact_id: 1, user_id: 2, interaction_type: 'call', description: "made a call, Invited to a birthday party.", 
+Event.create(contact_id: 1, user_id: 1, interaction_type: 'call', description: "made a call, Invited to a birthday party.", 
     date: Faker::Date.between(from: 4.days.ago, to: Date.today))
-Event.create(contact_id: 1, user_id: 3, interaction_type: 'email', description: "Sent an email about a job posting.", 
+Event.create(contact_id: 3, user_id: 1, interaction_type: 'email', description: "Sent an email about a job posting.", 
     date: Faker::Date.between(from: 4.days.ago, to: Date.today))
-Event.create(contact_id: 1, user_id: 4, interaction_type: 'call', description: "made a call, talked about cats.", 
+Event.create(contact_id: 3, user_id: 1, interaction_type: 'call', description: "made a call, talked about cats.", 
+    date: Faker::Date.between(from: 4.days.ago, to: Date.today))
+Event.create(contact_id: 6, user_id: 2, interaction_type: 'email', description: "Sent an email about a recipie.", 
+    date: Faker::Date.between(from: 4.days.ago, to: Date.today))
+Event.create(contact_id: 6, user_id: 2, interaction_type: 'call', description: "made a call, talked about exotic fish.", 
     date: Faker::Date.between(from: 4.days.ago, to: Date.today))

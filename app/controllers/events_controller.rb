@@ -16,12 +16,26 @@ class EventsController < ApplicationController
         @event = @contact.events.new(event_params)
         @event.user_id = current_user.id
         if @event.save
-            # redirect_to contact_events_url(@contact)
-            # Redirect to here when the "all events" calendar has more functionality/js
+            # redirect_to contact_events_url(@contact) when the "all events" calendar has more functionality/js
             redirect_to @contact
         else
             flash[:error] = @event.errors.full_messages
             redirect_back(fallback_location: @contact)
+        end
+    end
+
+    def edit
+        @event = Event.find(params[:id])
+    end
+
+    def update
+        @event = Event.find(params[:id])
+        if @event.update(edit_event_params)
+            flash[:success] = "event updated!"
+            redirect_to contact_path(@event.contact)
+        else
+            flash.now[:error] = @event.errors.full_messages
+            render :edit
         end
     end
 
@@ -44,6 +58,10 @@ class EventsController < ApplicationController
 
         def event_params
             params.require(:events).permit(:interaction_type, :description, :date)
+        end
+
+        def edit_event_params
+            params.require(:event).permit(:interaction_type, :description, :date)
         end
 
         def require_event_ownership

@@ -1,0 +1,20 @@
+<div class="columns">
+    <div class="column is-one-quarter">
+        <%= form_with model: contact, :url => contact_events_path, :method => :post do |f| %>
+            <%= f.simple_fields_for :events do |r| %>
+                <%= r.input :interaction_type do %>
+                    <div class="control">
+                        <div class="select">
+                            <%= r.select :interaction_type, ["call", "text", "message", "videochat", "email", "mail", "solo_encounter", "group_encounter"] %>
+                        </div>
+                    </div>
+                <% end %>
+
+                <%= r.input :description, as: :text %>
+                <%= r.input :date, as: :date, html5: true %>
+                <%= r.submit 'Save Event', class: "button is-primary" %>
+                <%= link_to "Cancel", :back, class: "button is-light" %>
+            <% end %>
+        <% end %>
+    </div>
+</div>

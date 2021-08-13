@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   resources :users, only: [:index, :show]
   resources :contacts do
-    resources :events
+    resources :events, shallow: true
   end
   get '/events', to: 'events#overview'
 
