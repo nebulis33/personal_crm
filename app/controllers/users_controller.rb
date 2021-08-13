@@ -8,6 +8,8 @@ class UsersController < ApplicationController
     end
 
     def show
+        @contacts = current_user.contacts.count
+        @events = current_user.events.count
     end
 
     private

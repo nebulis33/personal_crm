@@ -1,5 +1,20 @@
 <br>
 <br>
-<%= current_user.first_name %>
 
-<%= link_to "Edit User", edit_user_registration_path %>
+<div class="title is-2">
+    <%= current_user.first_name %> <%= current_user.last_name %>
+</div>
+<div class="subtitle is-4">
+    <%= current_user.email %>
+</div>
+
+Your Stats:
+
+<div class="block">
+    <%= @contacts %> Contacts
+</div>
+<div class="block">
+    <%= @events %> Events
+</div>
+
+<%= link_to "Edit Account", edit_user_registration_path, class: "button is-light" %>
