@@ -12,6 +12,12 @@ class UsersController < ApplicationController
         @events = current_user.events.count
     end
 
+    def weekly_rundown
+        @upcoming_events = Event.includes(:contact).where(user_id: self.id).upcoming_events
+        #TODO: upcoming events should probably be in the user model at this rate, in which case Contact#upcoming_events needs to be moved as well
+        NotifierMailer.upcoming_dates.(self, self.birthdays, @upcoming_events).deliver
+    end
+
     private
         def require_user
             user = User.find(params[:id])

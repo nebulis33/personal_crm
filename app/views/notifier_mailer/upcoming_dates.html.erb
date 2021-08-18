@@ -1,0 +1,19 @@
+<h1>Notifier#upcoming_dates</h1>
+
+<p>
+  <%= @greeting %>
+  <br>
+  You have <%= @birthdays.count %> birthdays coming up.
+  <br>
+  <% @birthdays.each do |b| %>
+    <%= b.first_name %> on <%= b.birthday.strftime("%m/%d") %>
+    <br>
+  <% end %>
+  <br>
+  You have <%= @upcoming_events.count %> events coming up.
+
+  <br>
+  You haven't contacted these people in over a week:
+  <br>
+  <%#= @need_to_contact.each do |nc| %>
+</p>

@@ -1,0 +1,13 @@
+Notifier#upcoming_dates
+
+<%= @greeting %>
+You have <%= @birthdays.count %> birthdays coming up.
+
+    <% @birthdays.each do |b| %>
+    <%= b.first_name %> on <%= b.birthday.strftime("%m/%d") %>
+
+    <% end %>
+You have <%= @upcoming_events.count %> events coming up.
+
+You haven't contacted these people in over a week:
+<%#= @need_to_contact.each do |nc| %>
